@@ -1,28 +1,27 @@
 ---
-title: Revenue
+title: 收入
 ---
 
-Umami Revenue allows you to helps track financial performance, measure ROI, and identify which pages or products
-generate the most income. It provides insights into customer behavior, helping optimize revenue sources
-and improve conversion rates. By linking revenue data with traffic and user behavior,
-businesses can make informed decisions to boost profitability and plan for future growth.
+Umami 收入帮助您追踪财务业绩、衡量投资回报率，并识别哪些页面或产品产生最多收入。
+它提供对客户行为的洞察，帮助优化收入来源并提高转化率。
+通过将收入数据与流量和用户行为关联，企业可以做出明智的决策来提高盈利能力并规划未来增长。
 
-The insight works by aggregating **Revenue** and **Currency** data across a specified time period.
+该分析功能通过在指定时间段内聚合**收入**和**货币**数据来工作。
 
-## Configuring Revenue
+## 配置收入
 
-To start collecting revenue data, you will be leveraging tracking an event with dynamic data. This can be done through [tracker functions](https://umami.is/docs/tracker-functions#event-data)
-or [data attributes](https://umami.is/docs/track-events#using-data-attributes). The tracked event must be passed along with the two dynamic data
-properties `revenue` and `currency`. If a currency code (ISO 4217) is not recognized, the insight will default to `USD`.
+要开始收集收入数据，您需要利用动态数据追踪事件。这可以通过[追踪器函数](https://umami.is/docs/tracker-functions#event-data)
+或[数据属性](https://umami.is/docs/track-events#using-data-attributes)完成。追踪的事件必须与两个动态数据属性 `revenue` 和 `currency` 一起传递。
+如果无法识别货币代码（ISO 4217），分析将默认为 `USD`。
 
-### Tracker function
+### 追踪器函数
 
 ```js
 umami.track('checkout-cart', { revenue: 19.99, currency: 'USD' });
 ```
 
-When tracking events, the default properties are included in the payload.
-This is equivalent to running:
+追踪事件时，默认属性包含在 payload 中。
+这相当于运行：
 
 ```js
 umami.track(props => ({
@@ -35,9 +34,9 @@ umami.track(props => ({
 }));
 ```
 
-### Data attributes
+### 数据属性
 
-Please note that revenue must be passed as a string while using this method.
+请注意，使用此方法时收入必须作为字符串传递。
 
 ```html
 <button
@@ -50,16 +49,16 @@ Please note that revenue must be passed as a string while using this method.
 </button>
 ```
 
-## Parameters
+## 参数
 
-- `Currency`: (required) The currency of the data to be aggregated.
+- `货币`：要聚合的数据的货币（必填）。
 
-## Create a insight
+## 创建分析
 
-### Step 1: Choose a currency
+### 第一步：选择货币
 
 ![image](/images/docs/revenue-currency.png)
 
-### Step 2: Run insight
+### 第二步：运行分析
 
 ![image](/images/docs/revenue-details.png)

@@ -29,12 +29,11 @@ const excludedPaths = ['/docs/guides', '/docs/api', '/docs/cloud'];
 export function DocumentationLink({ icon }: { icon: ReactNode }) {
   const pathname = usePathname();
   const isActive =
-    pathname.startsWith('/docs') &&
-    !excludedPaths.some((path) => pathname.startsWith(path));
+    pathname.startsWith('/docs') && !excludedPaths.some(path => pathname.startsWith(path));
 
   return (
     <NavLink href="/docs" icon={icon} isActive={isActive}>
-      Documentation
+      文档
     </NavLink>
   );
 }
@@ -45,7 +44,7 @@ export function GuidesLink({ icon }: { icon: ReactNode }) {
 
   return (
     <NavLink href="/docs/guides" icon={icon} isActive={isActive}>
-      Guides
+      指南
     </NavLink>
   );
 }
@@ -56,7 +55,7 @@ export function ApiLink({ icon }: { icon: ReactNode }) {
 
   return (
     <NavLink href="/docs/api" icon={icon} isActive={isActive}>
-      API Reference
+      API 参考
     </NavLink>
   );
 }
@@ -67,25 +66,14 @@ export function CloudLink({ icon }: { icon: ReactNode }) {
 
   return (
     <NavLink href="/docs/cloud" icon={icon} isActive={isActive}>
-      Cloud
+      云端
     </NavLink>
   );
 }
 
-export function ExternalNavLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: ReactNode;
-}) {
+export function ExternalNavLink({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <Link
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={linkClassName}
-    >
+    <Link href={href} target="_blank" rel="noopener noreferrer" className={linkClassName}>
       {children}
       <ExternalLink className="size-3" />
     </Link>

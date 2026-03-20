@@ -1,38 +1,36 @@
 ---
-title: Bypass ad blockers
+title: 绕过广告拦截器
 ---
 
-Even though Umami is a privacy-focused product, it may still get blocked by
-certain ad blockers. Ad blockers use blocklists maintained by many different people.
-Some lists can be overly agressive, for example blocking anything with even
-the word `analytics` in it or simply blocking all tracking products regardless
-of how they operate.
+尽管 Umami 是注重隐私的产品，但它仍可能被某些广告拦截器拦截。
+广告拦截器使用由许多人维护的拦截列表。
+一些列表可能过于激进，例如拦截任何包含甚至
+`analytics` 这个词的内容，或者简单地拦截所有追踪产品，不管它们如何运作。
 
-Here are few methods you can use to avoid ad blockers.
+以下是一些可以用来避免广告拦截器的方法。
 
-## Proxying
+## 代理
 
-Proxying is done at the server level so you will need access to your web server to make changes.
-With this method, you can proxy the tracking script itself to hide the actual name and location of
-the original script.
+代理在服务器级别完成，因此您需要访问您的 Web 服务器才能进行更改。
+使用此方法，您可以代理追踪脚本本身以隐藏原始脚本的实际名称和位置。
 
-For example, you can have a script on your website that is:
+例如，您可以在您的网站上放置一个脚本：
 
 `https://your-website.com/script.js`
 
-That is proxying the file at:
+它正在代理位于以下位置的文件：
 
 `https://cloud.umami.is/script.js`
 
-So even if the ad blocker blocks the `cloud.umami.is` domain, your own domain would be safe.
+因此，即使广告拦截器拦截了 `cloud.umami.is` 域名，您自己的域名也是安全的。
 
-Here are some tutorials you can use:
+以下是一些您可以使用的教程：
 
 - [Nginx](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
 - [Apache](https://httpd.apache.org/docs/2.4/howto/reverse_proxy.html)
 
-To implement this using server-side, what you can do is make a separate endpoint.
-For instance, in [Express.js](https://expressjs.com):
+要使用服务器端实现此操作，您可以创建一个单独的端点。
+例如，在 [Express.js](https://expressjs.com) 中：
 
 ```js
 app.get("/stats.js", async (req, res) => {
@@ -41,39 +39,35 @@ app.get("/stats.js", async (req, res) => {
 });
 ```
 
-Then in your html head tag:
+然后在您的 html head 标签中：
 ```html
 <script defer src="/stats.js" data-website-id="..."></script>
 ```
 
+如果您使用的是 [Next.js](https://nextjs.org) 等框架，可以使用他们的[重写](https://nextjs.org/docs/pages/api-reference/next-config-js/rewrites)功能。
 
-If you are using a framework like [Next.js](https://nextjs.org), you can use their [rewrites](https://nextjs.org/docs/pages/api-reference/next-config-js/rewrites) feature.
+## 托管追踪脚本
 
-## Hosting the tracker script
+如果您无法访问 Web 服务器且无法代理脚本，您可以简单地在自己的域名上托管整个追踪脚本。
 
-If you don't have access to the web server and are unable to proxy the script, you can simply host the entire
-tracker script on your own domain.
+1. 在浏览器中打开脚本 URL，`https://cloud.umami.is/script.js`。
+2. 保存文件。
+3. 将文件上传到您的域名。
+4. 设置 `data-host-url` 属性以将数据发送到正确的位置。请参阅[追踪器配置](https://umami.is/docs/tracker-configuration)。
 
-1. Open the the script URL in your browser, `https://cloud.umami.is/script.js`.
-2. Save the file.
-3. Upload the file to your domain.
-4. Set the `data-host-url` attribute to send data to the correct location. See [tracker configuration.](https://umami.is/docs/tracker-configuration)
+请注意，此方法不如代理可靠，如果追踪脚本发生变化，您需要再次下载并更新脚本。
 
-Note that this method is not as reliable as proxying and if the tracker script were to change, you would need
-to download and update the script again.
+## 使用环境变量（自托管）
 
-## Using environment variables (self-hosting)
+如果您正在自托管 Umami，可以使用[环境变量](/docs/environment-variables)配置您的实例。
 
-If you are self-hosting Umami, you can configure your instance using [environment variables](/docs/environment-variables).
+有两个可能被拦截的来源：
 
-There are two sources that could potentially be blocked:
+1. `https://your-umami.com/script.js` 处的追踪脚本
+2. `https://your-umami.com/api/send` 处的统计收集端点
 
-1. The tracker script at `https://your-umami.com/script.js`
-2. The stats collection endpoint at `https://your-umami.com/api/send`.
+[`TRACKER_SCRIPT_NAME`](/docs/environment-variables#tracker_script_name) 变量可用于将追踪脚本重命名为类似 `x.js` 的名称。
+然后您可以将脚本源更改为 `https://your-umami.com/x.js`。
 
-The [`TRACKER_SCRIPT_NAME`](/docs/environment-variables#tracker_script_name) variable can be used to rename your tracker script to
-something like `x.js`. You would then change your script source to `https://your-umami.com/x.js`.
-
-The [`COLLECT_API_ENDPOINT`](/docs/environment-variables#collect_api_endpoint) variable can be used to rename your endpoint to something
-like `/api/x`. The tracker script will automatically make calls to your custom endpoint name
-instead of `/api/send`.
+[`COLLECT_API_ENDPOINT`](/docs/environment-variables#collect_api_endpoint) 变量可用于将端点重命名为类似 `/api/x` 的名称。
+追踪脚本将自动调用您的自定义端点名称，而不是 `/api/send`。

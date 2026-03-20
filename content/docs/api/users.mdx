@@ -1,12 +1,12 @@
 ---
-title: Users
+title: 用户
 ---
 
-Operations around User management.
+用户管理相关的操作。
 
-These endpoints are only available for self-hosted instances for **admin** users and not **Umami Cloud**.
+这些端点仅适用于 **admin** 用户的自托管实例，不适用于 **Umami Cloud**。
 
-**Endpoints**
+**端点**
 
 ```text
 POST /api/users
@@ -21,187 +21,59 @@ GET /api/users/:userId/teams
 
 ## POST /api/users
 
-Creates a user.
+创建用户。
 
-**Parameters**
+**参数**
 
-- `username`: (string) The user's username.
-- `password`: (string) The user's password.
-- `role`: (string) Choose from (`admin` | `user` | `view-only`).
-- `id`: (string | optional) Force a UUID assignment to the user.
-
-**Request body**
-
-```json
-{
-  "username": "member",
-  "password": "umami",
-  "role": "user"
-}
-```
-
-**Sample response**
-
-```json
-{
-  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "username": "member",
-  "role": "user"
-}
-```
+- `username`：（字符串）用户的用户名。
+- `password`：（字符串）用户的密码。
+- `role`：（字符串）选择（`admin` | `user` | `view-only`）。
+- `id`：（字符串 | 可选）强制为用户分配 UUID。
 
 ---
 
 ## GET /api/users/:userId
 
-Gets a user by ID.
-
-**Sample response**
-
-```json
-{
-  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "username": "member",
-  "role": "user",
-  "createdAt": "2025-10-10T23:09:16.524Z"
-}
-```
+通过 ID 获取用户。
 
 ---
 
 ## POST /api/users/:userId
 
-Updates a user.
+更新用户。
 
-**Parameters**
+**参数**
 
-- `username`: (optional string) The user's username.
-- `password`: (optional string) The user's password.
-- `role`: (optional string) Select from `admin`, `user`, `view-only`.
-
-**Request body**
-
-```json
-{
-  "username": "admin",
-  "password": "umami",
-  "role": "admin"
-}
-```
-
-**Sample response**
-
-```json
-{
-  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "username": "admin",
-  "role": "admin",
-  "createdAt": "0000-00-00T00:00:00.000Z"
-}
-```
+- `username`：（可选字符串）用户的用户名。
+- `password`：（可选字符串）用户的密码。
+- `role`：（可选字符串）选择 `admin`、`user`、`view-only`。
 
 ---
 
 ## DELETE /api/users/:userId
 
-Deletes a user.
-
-**Sample response**
-
-```json
-{
-  "ok": true
-}
-```
+删除用户。
 
 ---
 
 ## GET /api/users/:userId/websites
 
-Gets all websites that belong to a user.
+获取属于用户的所有网站。
 
-**Parameters**
+**参数**
 
-- `includeTeams`: (boolean) Set to true if you want to include websites where you are the team owner.
-- `search`: (optional string) Search text.
-- `page`: (optional number, default 1) Determines page.
-- `pageSize`: (optional string) Determines how many results to return.
-
-**Sample response**
-
-```json
-{
-  "data": [
-    {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-      "name": "My Website",
-      "domain": "mywebsite.com",
-      "shareId": null,
-      "resetAt": null,
-      "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-      "teamId": null,
-      "createdBy": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-      "createdAt": "2025-09-16T19:59:32.957Z",
-      "updatedAt": "2025-09-16T19:59:32.957Z",
-      "deletedAt": null,
-      "user": {
-        "username": "admin",
-        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-      }
-    }
-  ],
-  "count": 1,
-  "page": 1,
-  "pageSize": 20
-}
-```
+- `includeTeams`：（布尔值）如果您想包含您是团队所有者的网站，则设置为 true。
+- `search`：（可选字符串）搜索文本。
+- `page`：（可选数字，默认 1）确定页码。
+- `pageSize`：（可选字符串）确定返回的结果数量。
 
 ---
 
 ## GET /api/users/:userId/teams
 
-Gets all teams that belong to a user.
+获取属于用户的所有团队。
 
-**Parameters**
+**参数**
 
-- `page`: (number | optional, default 1) Determines page.
-- `pageSize`: (string | optional) Determines how many results to return.
-
-**Sample response**
-
-```json
-{
-  "data": [
-    {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-      "name": "Umami Software, Inc",
-      "accessCode": "team_qunhu7q6NVZDu6Cg",
-      "logoUrl": null,
-      "createdAt": "2025-09-24T22:08:35.259Z",
-      "updatedAt": "2025-09-24T22:08:35.259Z",
-      "deletedAt": null,
-      "members": [
-        {
-          "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "teamId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "role": "team-owner",
-          "createdAt": "2025-09-24T22:08:35.302Z",
-          "updatedAt": "2025-09-24T22:08:35.302Z",
-          "user": {
-            "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            "username": "admin"
-          }
-        }
-      ],
-      "_count": {
-        "websites": 0,
-        "members": 1
-      }
-    }
-  ],
-  "count": 1,
-  "page": 1,
-  "pageSize": 20
-}
-```
+- `page`：（数字 | 可选，默认 1）确定页码。
+- `pageSize`：（字符串 | 可选）确定返回的结果数量。

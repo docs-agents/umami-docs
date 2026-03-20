@@ -1,64 +1,64 @@
 ---
-title: Running on Railway
+title: 在 Railway 上运行
 ---
 
-[Railway](https://railway.app/) is attempting to build software development infrastructure for humans. It's founded with the core ideology that building software should be "Take what you need, leave what you don't" and that the current iteration of tools for software development is far too complicated for current generations of developers, let alone the ones that come next. As a result, Railway handles your builds, deployments, scaling, and management of infrastructure; from development to production!
+[Railway](https://railway.app/) 正在尝试为人类构建软件开发基础设施。它的核心理念是构建软件应该是"需要什么就拿什么，不需要的就留下"，而且目前的软件开发工具迭代对当代开发者来说已经太复杂了，更不用说下一代了。因此，Railway 处理您的构建、部署、扩展和基础设施管理；从开发到生产！
 
-Railway provides a free hosting services which allows you to deploy Umami and set up a PostgreSQL database so you can have your self-hosted version at the click of a button.
+Railway 提供免费托管服务，允许您部署 Umami 并设置 PostgreSQL 数据库，这样您只需点击一下按钮就可以拥有自托管版本。
 
-## Setup Website and Database
+## 设置网站和数据库
 
-### Railway Button (Recommended)
+### Railway 按钮（推荐）
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/umami-analytics)
 
-Click the button above to deploy your self-hosted version of the Umami website along with an automagically provisioned PostgreSQL database.
+点击上面的按钮部署您的 Umami 网站自托管版本以及自动配置的 PostgreSQL 数据库。
 
-You should now be able to visit your Umami dashboard and set up sites that you want to track analytics for.
+您现在应该能够访问您的 Umami 仪表盘并设置您想要追踪分析的网站。
 
-You can find the URL in your project dashboard which you can visit by running `railway open`.
+您可以在项目仪表盘中找到 URL，您可以通过运行 `railway open` 来访问。
 
-## Running on Railway from a forked repository
+## 从分叉的仓库在 Railway 上运行
 
-The previously described method is the quickest and easiest way to get Umami up and running on Railway. However, this creates a new repository with a single commit under your GitHub account. You may want to use a forked repository instead to be able to conveniently receive updates from (or contribute pull requests to) the Umami source repository via GitHub.
+前面描述的方法是在 Railway 上启动和运行 Umami 最快、最简单的方法。但是，这会在您的 GitHub 账户下创建一个单一提交的新仓库。您可能想改用分叉的仓库，以便通过 GitHub 方便地从 Umami 源代码仓库接收更新（或贡献拉取请求）。
 
-### Set up Railway project
+### 设置 Railway 项目
 
-1. Fork the [Umami repository](https://github.com/umami-software/umami).
-1. Create an account on [Railway](https://railway.app/) connected to GitHub.
-1. If you wish, you can give Railway permission only to your Umami fork repository when linking your GitHub account.
-1. From the dashboard page click **New Project > Deploy from repo**.
-1. Choose your forked Umami repository and select the **master** branch.
-1. Add a second variable called `PORT`, set its value to a valid port number (eg: `3000`). Click **Add**.
-1. Add a third variable called `DATABASE_TYPE`, set its value to `postgres`. Click **Add**.
-1. Add a fourth variable called `HOSTNAME`, set its value to `0.0.0.0`. Click **Add**.
-1. Click **Deploy**.
+1. 分叉 [Umami 仓库](https://github.com/umami-software/umami)。
+1. 在 [Railway](https://railway.app/) 上创建一个连接到 GitHub 的账户。
+1. 如果愿意，在链接 GitHub 账户时，您可以只授予 Railway 对 Umami 分叉仓库的权限。
+1. 从仪表盘页面点击**新建项目 > 从仓库部署**。
+1. 选择您的分叉的 Umami 仓库并选择 **master** 分支。
+1. 添加第二个名为 `PORT` 的变量，将其值设置为有效端口号（例如：`3000`）。点击**添加**。
+1. 添加第三个名为 `DATABASE_TYPE` 的变量，将其值设置为 `postgres`。点击**添加**。
+1. 添加第四个名为 `HOSTNAME` 的变量，将其值设置为 `0.0.0.0`。点击**添加**。
+1. 点击**部署**。
 
-This initial deploy will fail until you follow the rest of these steps.
+此初始部署将失败，直到您按照以下步骤操作。
 
-### Database and Deploy
+### 数据库和部署
 
-1. Close the settings sidebar and click **New**, click **Database** and select **Add PostgreSQL**.
-1. On the dashboard, select your Umami service, go to the **Variables** tab and click **New Variable**.
-1. Click **Add Reference** and select the `DATABASE_URL` variable from your Postgres database. Click **Add**.
+1. 关闭设置侧栏并点击**新建**，点击**数据库**并选择**添加 PostgreSQL**。
+1. 在仪表盘上，选择您的 Umami 服务，转到**变量**选项卡并点击**新建变量**。
+1. 点击**添加引用**并从您的 Postgres 数据库中选择 `DATABASE_URL` 变量。点击**添加**。
 
-Adding the database should trigger a re-deploy, and clicking the app link should get you to the login page of your Umami instance.
+添加数据库应触发重新部署，点击应用链接应带您到 Umami 实例的登录页面。
 
-### Troubleshooting
+### 故障排除
 
-If Railway states `Your project has no deploys` within your dashboard.
+如果 Railway 在您的仪表盘中显示 `您的项目没有部署`。
 
-1. Select `Set up your project locally` in the bottom left hand corner.
+1. 在左下角选择`本地设置您的项目`。
 
-2. Within the `umami` root directory follow the instructions within the pop up.
+2. 在 `umami` 根目录中，按照弹出窗口中的说明操作。
 
-- Login to your Railway account with `railway login`
-- Link your project with `railway link`
-- Open your project dashboard with `railway open`
-- Upload and deploy your project with `railway up`
+- 使用 `railway login` 登录您的 Railway 账户
+- 使用 `railway link` 链接您的项目
+- 使用 `railway open` 打开您的项目仪表盘
+- 使用 `railway up` 上传和部署您的项目
 
-3. Follow the **Getting started** guide starting from the [Login](/docs/login) step and be sure to change the default password.
+3. 按照**入门**指南从[登录](/docs/login)步骤开始，并务必更改默认密码。
 
-### Notes
+### 注意事项
 
-- Read more about [adding a website](https://umami.is/docs/add-a-website) and [collecting data](https://umami.is/docs/collect-data) here
+- 在[此处](https://umami.is/docs/add-a-website)了解更多关于添加网站和[收集数据](https://umami.is/docs/collect-data)的信息

@@ -1,21 +1,21 @@
 ---
-title: Distinct IDs
+title: 独立 ID
 ---
 
-A Distinct ID is a unique identifier assigned to a user, either anonymously or when they log in.
-This allows you to associate actions (page views, clicks, conversions) with a single user across multiple sessions.
-For a more extensive way to identify a session, take a look at [Session Data](/docs/tracker-functions#session-data).
+Distinct ID 是分配给用户的唯一标识符，可以是匿名的，也可以在用户登录时分配。
+这允许您将操作（页面浏览、点击、转化）与跨多个会话的单个用户关联。
+如需更广泛的会话识别方式，请查看[会话数据](/docs/tracker-functions#session-data)。
 
-## Use Cases
+## 使用场景
 
-- Properly attribute user behavior.
-- Connect events across multiple sessions or devices.
-- Identify repeat users vs. new users.
-- Build out journeys and profiles based on user history.
+- 正确归因用户行为。
+- 连接跨多个会话或设备的事件。
+- 区分重复用户与新用户。
+- 根据用户历史构建用户旅程和档案。
 
-## Usage
+## 使用方法
 
-Add the **id** property to the payload. This property has a 50 character limit.
+在 payload 中添加 **id** 属性。此属性有 50 个字符的限制。
 
 ```json
 {
@@ -33,12 +33,12 @@ Add the **id** property to the payload. This property has a 50 character limit.
 }
 ```
 
-## Search
+## 搜索
 
-Navigate to **Sessions** to view visitor activity.
+进入**会话**查看访问者活动。
 
 ![image](/images/docs/traffic-navbar.png)
 
-Search for a specific **Distinct ID** to views all connected sessions for that time range.
+搜索特定的 **Distinct ID** 以查看该时间范围内所有关联的会话。
 
 ![image](/images/docs/distinct-id-search.png)

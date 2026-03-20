@@ -1,33 +1,33 @@
 ---
-title: Sending stats
+title: 发送统计
 ---
 
 ## POST /api/send
 
-To register an `event`, you need to send a `POST` to `/api/send` with
-the following data:
+要注册一个 `event`，您需要向 `/api/send` 发送一个 `POST` 请求，
+包含以下数据：
 
-For **Umami Cloud** send a POST to `https://cloud.umami.is/api/send`.
+对于 **Umami Cloud**，向 `https://cloud.umami.is/api/send` 发送 POST 请求。
 
-**Parameters**
+**参数**
 
 `payload`
 
-- `hostname`: (string) Name of host.
-- `screen`: (string) Screen resolution (ex. "1920x1080")
-- `language`: (string) Language of visitor (ex. "en-US")
-- `url`: (string) Page URL.
-- `referrer`: (string) Referrer URL.
-- `title`: (string) Page title.
-- `tag`: (string) Additional tag description.
-- `id`: (string) Session identifier.
-- `website`: (string) Website ID.
-- `name`: (string) Name of the event.
-- `data`: (object | optional) Additional data for the event.
+- `hostname`：（字符串）主机名。
+- `screen`：（字符串）屏幕分辨率（例如 "1920x1080"）。
+- `language`：（字符串）访问者语言（例如 "en-US"）。
+- `url`：（字符串）页面 URL。
+- `referrer`：（字符串）引荐来源 URL。
+- `title`：（字符串）页面标题。
+- `tag`：（字符串）附加标签描述。
+- `id`：（字符串）会话标识符。
+- `website`：（字符串）网站 ID。
+- `name`：（字符串）事件名称。
+- `data`：（对象 | 可选）事件的附加数据。
 
-`type`: (string) `event` is currently the only type available.
+`type`：（字符串）`event` 是目前唯一可用的类型。
 
-**Sample payload**
+**示例 payload**
 
 ```json
 {
@@ -48,13 +48,11 @@ For **Umami Cloud** send a POST to `https://cloud.umami.is/api/send`.
 }
 ```
 
-Note, for `/api/send` requests you do not need to send an
-authentication token.
+请注意，对于 `/api/send` 请求，您不需要发送身份验证令牌。
 
-Also, you need to send a proper `User-Agent` HTTP header or
-your request won't be registered.
+此外，您需要发送正确的 `User-Agent` HTTP 标头，否则您的请求将不会被注册。
 
-**Sample response**
+**示例响应**
 
 ```json
 {
@@ -64,9 +62,9 @@ your request won't be registered.
 }
 ```
 
-**Programmatically**
+**以编程方式**
 
-You can generate most of these values programmatically with JavaScript using the browser APIs. For example:
+您可以使用浏览器 API 通过 JavaScript 以编程方式生成这些值。例如：
 
 ```js
 const data = {

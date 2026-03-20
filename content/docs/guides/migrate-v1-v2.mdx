@@ -1,59 +1,59 @@
 ---
-title: Migrate v1 to v2
+title: 从 v1 迁移到 v2
 ---
 
-Umami v2 introduces a redesigned schema and a number of breaking changes.
+Umami v2 引入了重新设计的架构和一些重大变更。
 
-## Breaking changes
+## 重大变更
 
-- The API endpoints have changed including new ones being added. See [API](/docs/api) for more information.
-- The tracker script has been renamed from `umami.js` to `script.js`.
-- The collect api endpoint has been renamed from `/api/collect` to `/api/send`.
-- The tracker no longer uses CSS class names to trigger events. It now uses HTML data attributes. See [Track events](/docs/track-events) for more information.
-- The methods on the global `umami` JavaScript object have changed. There is now a single `.track()` method and a new way to send event data.
-  See [Tracker functions](/docs/tracker-functions) for more information.
-- The `TRACKER_SCRIPT_NAME` environment variable no longer appends the `.js` extension to the script name. See [Environment variables](/docs/environment-variables) for more information.
+- API 端点已更改，包括新增的端点。有关更多信息，请参阅 [API](/docs/api)。
+- 追踪脚本已从 `umami.js` 重命名为 `script.js`。
+- 收集 API 端点已从 `/api/collect` 重命名为 `/api/send`。
+- 追踪器不再使用 CSS 类名来触发事件。它现在使用 HTML 数据属性。有关更多信息，请参阅[追踪事件](/docs/track-events)。
+- 全局 `umami` JavaScript 对象上的方法已更改。现在有一个单一的 `.track()` 方法和一种发送事件数据的新方式。
+  有关更多信息，请参阅[追踪器函数](/docs/tracker-functions)。
+- `TRACKER_SCRIPT_NAME` 环境变量不再追加 `.js` 扩展名到脚本名称。请参阅[环境变量](/docs/environment-variables)获取更多信息。
 
-## Data migration
+## 数据迁移
 
-Due to the schema changes, your data in your v1 database needs to be converted into v2.
-To assist with the migration we created a script `@umami/migrate-v1-v2` that will migrate all of your data for you.
+由于架构变更，您 v1 数据库中的数据需要转换为 v2。
+为协助迁移，我们创建了一个脚本 `@umami/migrate-v1-v2`，它将为您迁移所有数据。
 
-### Requirements
+### 要求
 
-- Database schema must be in sync with the latest v1 version (v1.4.0). The script will query the prisma migrations table to ensure the latest migrations have been ran.
+- 数据库架构必须与最新 v1 版本（v1.4.0）同步。该脚本将查询 Prisma 迁移表以确保已运行最新迁移。
 
-### Important
+### 重要
 
-- Backup your target database prior to use. Potential data loss may occur if the migration is interrupted.
-- For users with larger datasets (5M+), the migration may take while. Please plan accordingly.
-- The script will NOT migrate any event data into v2.
-- The script will ask you if you want to drop your v1 tables after the migration is complete.
-- If an `event_data` table is found populated with data, it will be renamed to `v1_event_data` but not dropped.
+- 使用前备份目标数据库。如果迁移被中断，可能会发生潜在的数据丢失。
+- 对于数据集较大（500 万以上）的用户，迁移可能需要一段时间。请相应地进行计划。
+- 该脚本不会将任何事件数据迁移到 v2。
+- 该脚本会询问您是否要在迁移完成后删除 v1 表。
+- 如果找到 `event_data` 表填充了数据，它将被重命名为 `v1_event_data` 但不会被删除。
 
-### Troubleshooting
+### 故障排除
 
-- If your `DATABASE_URL` is localhost and the migration can't connect to the database, try changing to an IP address, for example: `127.0.0.1`.
+- 如果您的 `DATABASE_URL` 是 localhost 且迁移无法连接到数据库，请尝试更改为 IP 地址，例如：`127.0.0.1`。
 
-## Running migration
+## 运行迁移
 
-There are two ways to run the migration script.
+有两种方式运行迁移脚本。
 
-### Running inside the Umami folder
+### 在 Umami 文件夹内运行
 
-Use this method if you have terminal access to your application folder.
-Make sure your application is already built. If not run `yarn build` first.
+如果您可以访问应用程序文件夹，请使用此方法。
+确保您的应用程序已经构建。如果没有，请先运行 `yarn build`。
 
 ```shell
 cd umami
 npx @umami/migrate-v1-v2@latest
 ```
 
-### Running standalone
+### 独立运行
 
-Use this method if you don't have access to your application folder like when deployed to Vercel or Netlify.
+如果您无法访问应用程序文件夹（如部署到 Vercel 或 Netlify 时），请使用此方法。
 
-**Install**
+**安装**
 
 ```shell
 git clone https://github.com/umami-software/migrate-v1-v2.git
@@ -62,34 +62,34 @@ yarn install
 yarn build
 ```
 
-**Configure**
+**配置**
 
-Create an `.env` file with the following variable defined:
+创建包含以下变量的 `.env` 文件：
 
 ```
-DATABASE_URL={connection url}
+DATABASE_URL={连接 URL}
 ```
 
-**Run**
+**运行**
 
 ```shell
 yarn start
 ```
 
-## Docker migration
+## Docker 迁移
 
-Go into your running Docker container. You can find the name by the output of `docker ps`.
+进入您的运行中的 Docker 容器。您可以通过 `docker ps` 的输出找到名称。
 
 ```shell
 docker exec -ti -u 0 <app container name> sh
 ```
 
-Run the migration script.
+运行迁移脚本。
 
 ```shell
 npx @umami/migrate-v1-v2@latest
 ```
 
-When the migration is run successfully, it should look like this:
+迁移成功运行后，应如下所示：
 
 ![image](/images/docs/migrate-v1-v2.png)

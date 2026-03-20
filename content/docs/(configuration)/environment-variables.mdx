@@ -1,28 +1,27 @@
 ---
-title: Environment variables
+title: 环境变量
 ---
 
-You can configure Umami with the use of environment variables. They go into the same `.env` file as your `DATABASE_URL`.
+您可以使用环境变量来配置 Umami。它们与您的 `DATABASE_URL` 放在同一个 `.env` 文件中。
 
 ---
 
-## Runtime variables
+## 运行时变量
 
-Runtime variables are recognized when Umami is running. You can set your environment variables prior to starting the application.
+运行时变量在 Umami 运行时被识别。您可以在启动应用程序之前设置环境变量。
 
 ### APP_SECRET
 
-A unique value for your installation.
+您安装的唯一值。
 
 ```
 APP_SECRET = "random string"
 ```
 
-
 ### CLIENT_IP_HEADER
 
-HTTP header to check for the client's IP address. This is useful when you're
-behind a proxy that uses non-standard headers.
+用于检查客户端 IP 地址的 HTTP 标头。当您在
+使用非标准标头的代理后面时，这很有用。
 
 ```
 CLIENT_IP_HEADER = "header name"
@@ -30,7 +29,7 @@ CLIENT_IP_HEADER = "header name"
 
 ### COLLECT_API_ENDPOINT
 
-Allows you to send metrics to a location different than the default `/api/send`. This is to help you avoid some [ad blockers](/docs/bypass-ad-blockers).
+允许您将指标发送到与默认 `/api/send` 不同的位置。这是为了帮助您避免一些[广告拦截器](/docs/bypass-ad-blockers)。
 
 ```
 COLLECT_API_ENDPOINT = "/my-custom-route"
@@ -38,7 +37,7 @@ COLLECT_API_ENDPOINT = "/my-custom-route"
 
 ### CORS_MAX_AGE
 
-How many seconds a CORS preflight should last. Default is 24 hours.
+CORS 预检请求应持续的秒数。默认为 24 小时。
 
 ```
 CORS_MAX_AGE = 86400
@@ -50,11 +49,11 @@ CORS_MAX_AGE = 86400
 DATABASE_URL = "connection string"
 ```
 
-Connection string for your database. This is the only required variable.
+数据库的连接字符串。这是唯一的必需变量。
 
 ### DEBUG
 
-Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.
+应用程序特定区域的控制台日志记录。值包括 `umami:auth`、`umami:clickhouse`、`umami:kafka`、`umami:middleware` 和 `umami:prisma`。
 
 ```
 DEBUG = "umami:*"
@@ -62,7 +61,7 @@ DEBUG = "umami:*"
 
 ### DISABLE_BOT_CHECK
 
-By default bots are excluded from statistics. This disables checking for bots.
+默认情况下，机器人被排除在统计之外。这将禁用机器人检查。
 
 ```
 DISABLE_BOT_CHECK = 1
@@ -70,7 +69,7 @@ DISABLE_BOT_CHECK = 1
 
 ### DISABLE_LOGIN
 
-Disables the login page for the application.
+禁用应用程序的登录页面。
 
 ```
 DISABLE_LOGIN = 1
@@ -78,7 +77,7 @@ DISABLE_LOGIN = 1
 
 ### DISABLE_UPDATES
 
-Disables the check for new versions of Umami.
+禁用检查 Umami 的新版本。
 
 ```
 DISABLE_UPDATES = 1
@@ -86,7 +85,7 @@ DISABLE_UPDATES = 1
 
 ### DISABLE_TELEMETRY
 
-Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.
+Umami 收集完全匿名的遥测数据以帮助改进应用程序。如果不想参与，您可以选择禁用此功能。
 
 ```
 DISABLE_TELEMETRY = 1
@@ -94,7 +93,7 @@ DISABLE_TELEMETRY = 1
 
 ### ENABLE_TEST_CONSOLE
 
-Enables the internal test page, `{host}/console`. Admin access is required. Users can manually fire pageviews and events to their websites.
+启用内部测试页面 `{host}/console`。需要管理员访问权限。用户可以手动向其网站触发页面浏览和事件。
 
 ```
 ENABLE_TEST_CONSOLE = 1
@@ -102,29 +101,29 @@ ENABLE_TEST_CONSOLE = 1
 
 ### FAVICON_URL
 
-The URL of the service for displaying website icons.
+用于显示网站图标的服务的 URL。
 
 ```
 FAVICON_URL = "service URL"
 ```
 
-The default is `icons.duckduckgo.com`:
+默认为 `icons.duckduckgo.com`：
 
 - https://icons.duckduckgo.com/ip3/{{domain}}.ico
 
-Some alternatives you can use:
+您可以使用的一些替代方案：
 
 - https://www.google.com/s2/favicons?domain={{domain}}
 - https://logo.clearbit.com/{{domain}}
 
 ### GEO_DATABASE_URL
 
-The URL for downloading the geo location database.
+用于下载地理位置数据库的 URL。
 
 ### HOSTNAME / PORT
 
-If you are running on an environment which requires you to bind to a specific hostname or port, such as Heroku, you can add
-these variables and start your app with `npm run start-env` instead of `npm start`.
+如果您在需要绑定到特定主机名或端口的环境中运行，例如 Heroku，您可以添加
+这些变量并使用 `npm run start-env` 而不是 `npm start` 启动您的应用。
 
 ```
 HOSTNAME = "my.hostname.com"
@@ -133,7 +132,7 @@ PORT = 3000
 
 ### IGNORE_IP
 
-You can provide a comma-delimited list of IP addresses and ranges to exclude from data collection.
+您可以提供逗号分隔的 IP 地址和范围列表，以从数据收集中排除。
 
 ```
 IGNORE_IP = "IP addresses or ranges"
@@ -141,7 +140,7 @@ IGNORE_IP = "IP addresses or ranges"
 
 ### LOG_QUERY
 
-If you are running in development mode, this will log database queries to the console for debugging.
+如果您在开发模式下运行，这会将数据库查询记录到控制台以进行调试。
 
 ```
 LOG_QUERY = 1
@@ -149,7 +148,7 @@ LOG_QUERY = 1
 
 ### PRIVATE_MODE
 
-Disables all external network calls. Note, this will also disable all website icons since they come from duckduckgo.com.
+禁用所有外部网络调用。注意，这也会禁用所有网站图标，因为它们来自 duckduckgo.com。
 
 ```
 PRIVATE_MODE = 1
@@ -157,7 +156,7 @@ PRIVATE_MODE = 1
 
 ### REMOVE_TRAILING_SLASH
 
-Removes the trailing slash from all incoming urls.
+从所有传入的 URL 中删除尾随斜杠。
 
 ```
 REMOVE_TRAILING_SLASH = 1
@@ -165,9 +164,9 @@ REMOVE_TRAILING_SLASH = 1
 
 ### TRACKER_SCRIPT_NAME
 
-Allows you to assign a custom name to the tracker script different from the default `script.js`. This is to help you avoid some [ad blockers](/docs/bypass-ad-blockers).
+允许您为追踪脚本分配与默认 `script.js` 不同的自定义名称。这是为了帮助您避免一些[广告拦截器](/docs/bypass-ad-blockers)。
 
-The `.js` extension is not required. The value can also be any path you choose, for example `/path/to/tracker`.
+不需要 `.js` 扩展名。该值也可以是您选择的任何路径，例如 `/path/to/tracker`。
 
 ```
 TRACKER_SCRIPT_NAME = "custom-script-name.js"
@@ -175,9 +174,9 @@ TRACKER_SCRIPT_NAME = "custom-script-name.js"
 
 ### SKIP_LOCATION_HEADERS
 
-Skips using known location headers for country/region/city detection and forces using the local geo database.
+跳过使用已知位置标头进行国家/地区/城市检测，并强制使用本地地理数据库。
 
-This is useful in environments where only the country (without region or city) header is set from the proxy or CDN (like Cloudflare’s `CF-IPCountry` when Network > IP Geolocationis switched to On).
+这在代理或 CDN 仅设置国家（没有地区或城市）标头的环境中很有用（如 Cloudflare 的 `CF-IPCountry`，当网络 > IP 地理位置切换为开时）。
 
 ```
 SKIP_LOCATION_HEADERS = 1
@@ -185,13 +184,13 @@ SKIP_LOCATION_HEADERS = 1
 
 ---
 
-## Build time variables
+## 构建时变量
 
-Build time variables are only recognized during the build process. This also includes building custom Docker images. You need to set your environment variables prior to building the application.
+构建时变量仅在构建过程中被识别。这包括构建自定义 Docker 镜像。您需要在构建应用程序之前设置环境变量。
 
 ### ALLOWED_FRAME_URLS
 
-A space-delimited list of urls allowed to host the application in an iframe.
+允许在 iframe 中托管应用程序的空格分隔的 URL 列表。
 
 ```
 ALLOWED_FRAME_URLS = "URLs"
@@ -199,7 +198,7 @@ ALLOWED_FRAME_URLS = "URLs"
 
 ### BASE_PATH
 
-If you want to host Umami under a subdirectory. You may need to update your reverse proxy settings to correctly handle the BASE_PATH prefix.
+如果您想在子目录下托管 Umami。您可能需要更新您的反向代理设置以正确处理 BASE_PATH 前缀。
 
 ```
 BASE_PATH = "/custom"
@@ -211,11 +210,11 @@ BASE_PATH = "/custom"
 DATABASE_TYPE = "postgresql"
 ```
 
-The type of DB to be used. This is only required for the Docker build.
+要使用的数据库类型。这仅对 Docker 构建是必需的。
 
 ### FORCE_SSL
 
-This will send a HTTP `Strict-Transport-Security` response header with all requests. See [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security).
+这将随所有请求发送 HTTP `Strict-Transport-Security` 响应标头。请参阅 [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)。
 
 ```
 FORCE_SSL = 1
@@ -223,7 +222,7 @@ FORCE_SSL = 1
 
 ### SKIP_DB_CHECK
 
-Skips the `check-db` step in the build process. Used for Docker builds.
+跳过构建过程中的 `check-db` 步骤。用于 Docker 构建。
 
 ```
 SKIP_DB_CHECK = 1
@@ -231,7 +230,7 @@ SKIP_DB_CHECK = 1
 
 ### SKIP_DB_MIGRATION
 
-Skips the Prisma migration step in the build process. Setting `SKIP_DB_CHECK` also skips this step.
+跳过构建过程中的 Prisma 迁移步骤。设置 `SKIP_DB_CHECK` 也会跳过此步骤。
 
 ```
 SKIP_DB_MIGRATION = 1

@@ -1,45 +1,46 @@
 # umami-docs
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+> 文档已翻译为简体中文。
 
-Run development server:
+这是一个使用 [Create Fumadocs](https://github.com/fuma-nama/fumadocs) 生成的 Next.js 应用程序。
+
+## 快速开始
+
+运行开发服务器：
 
 ```bash
 npm run dev
-# or
+# 或
 pnpm dev
-# or
+# 或
 yarn dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+在浏览器中打开 http://localhost:3000 查看结果。
 
-## Explore
+## 项目结构
 
-In the project, you can see:
+您可以在项目中看到以下内容：
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
+- `lib/source.ts`：内容源适配器代码，[`loader()`](https://fumadocs.dev/docs/headless/source-api) 提供访问内容的接口。
+- `lib/layout.shared.tsx`：布局的共享选项，可选但建议保留。
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+| 路由                        | 描述                               |
+| --------------------------- | ---------------------------------- |
+| `app/(home)`                | 落地页和其他页面的路由组。          |
+| `app/docs`                  | 文档布局和页面。                    |
+| `app/api/search/route.ts`   | 搜索的路由处理器。                  |
 
 ### Fumadocs MDX
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+项目中包含了 `source.config.ts` 配置文件，您可以自定义不同的选项，如 frontmatter schema。
 
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+详细说明请阅读 [Introduction](https://fumadocs.dev/docs/mdx)。
 
-## Learn More
+## 了解更多
 
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
+要了解更多关于 Next.js 和 Fumadocs 的信息，请查看以下资源：
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.dev) - learn about Fumadocs
+- [Next.js 文档](https://nextjs.org/docs) - 了解 Next.js 功能和 API。
+- [学习 Next.js](https://nextjs.org/learn) - 交互式 Next.js 教程。
+- [Fumadocs](https://fumadocs.dev) - 了解 Fumadocs

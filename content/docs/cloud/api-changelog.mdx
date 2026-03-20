@@ -2,110 +2,93 @@
 title: Umami API
 ---
 
-This page documents changes made to **api.umami.is**.
+此页面记录了对 **api.umami.is** 所做的更改。
 
 ## 2026-03-02
 
-**Events**
+**事件**
 
-- `GET /api/websites/:websiteId/event-data`: **Added**
+- `GET /api/websites/:websiteId/event-data`：**新增**
 
 ## 2026-02-04
 
-**Share**
-- Added `share` API docs [here](/docs/api/share).
+**分享**
+- 在[此处](/docs/api/share)添加了 `share` API 文档。
 
 ## 2025-11-13
 
-**Realtime**
+**实时**
 
-- `GET /api/realtime/:websiteId`: Removed `timezone` parameter. Response will always return in `UTC` across all datasets.
+- `GET /api/realtime/:websiteId`：移除 `timezone` 参数。响应将始终以 `UTC` 跨所有数据集返回。
 
 ## 2025-10-07
 
-**Filters**
+**筛选**
 
-- Changed filter `url` to `path`.
-- Changed filter `host` to `hostname`
+- 将筛选器 `url` 更改为 `path`。
+- 将筛选器 `host` 更改为 `hostname`
 
-**Websites**
+**网站**
 
-- `GET /websites/[id]/metrics`: The `type` parameter `url` has been changed to `path`.
-- `GET /websites/[id]/stats`: The reponse data structure has changed.
+- `GET /websites/[id]/metrics`：`type` 参数 `url` 已更改为 `path`。
+- `GET /websites/[id]/stats`：响应数据结构已更改。
 
-```json
-{
-  "pageviews": 34210,
-  "visitors": 9401,
-  "visits": 12726,
-  "bounces": 7918,
-  "totaltime": 5214477,
-  "comparison": {
-    "pageviews": 30818,
-    "visitors": 8776,
-    "visits": 11756,
-    "bounces": 7396,
-    "totaltime": 1704355
-  }
-}
-```
+**事件**
 
-**Events**
+- `GET /event-data/values`：`eventName` 查询参数已更改为 `event`。
 
-- `GET /event-data/values`: The `eventName` query parameter has been changed to `event`.
+**报告**
 
-**Reports**
-
-- `POST /reports`: The `insights` report has been changed to `breakdown`.
+- `POST /reports`：`insights` 报告已更改为 `breakdown`。
 
 ## 2024-09-09
 
-**Websites**
+**网站**
 
-- `GET /websites/[id]/pageviews`: Fixed `region` parameter to optional.
-- `GET /websites/[id]/events`: Changed result set to website event details within a given time range.
-- `GET /websites/[id]/events/series`: **New** event metrics endpoint (previously `GET /websites/[id]/events`).
+- `GET /websites/[id]/pageviews`：将 `region` 参数修复为可选。
+- `GET /websites/[id]/events`：将结果集更改为给定时间范围内的网站事件详情。
+- `GET /websites/[id]/events/series`：**新增**事件指标端点（之前的 `GET /websites/[id]/events`）。
 
-**Event Data**
+**事件数据**
 
-- `GET /event-data/events` : **Moved** to `/websites/[id]/event-data/events`.
-- `GET /event-data/fields` : **Moved** to `/websites/[id]/event-data/fields`.
-- `GET /event-data/stats` : **Moved** to `/websites/[id]/event-data/stats`.
-- `GET /websites/[id]/event-data/values` : **Added**
+- `GET /event-data/events`：**移动**到 `/websites/[id]/event-data/events`。
+- `GET /event-data/fields`：**移动**到 `/websites/[id]/event-data/fields`。
+- `GET /event-data/stats`：**移动**到 `/websites/[id]/event-data/stats`。
+- `GET /websites/[id]/event-data/values`：**新增**
 
-**Sessions**
+**会话**
 
-- `GET /websites/:websiteId/sessions` : **Added**
-- `GET /websites/:websiteId/sessions/stats` : **Added**
-- `GET /websites/:websiteId/sessions/:sessionId` : **Added**
-- `GET /websites/:websiteId/sessions/:sessionId/activity` : **Added**
-- `GET /websites/:websiteId/sessions/:sessionId/properties` : **Added**
-- `GET /websites/:websiteId/session-data/properties` : **Added**
-- `GET /websites/:websiteId/session-data/values` : **Added**
+- `GET /websites/:websiteId/sessions`：**新增**
+- `GET /websites/:websiteId/sessions/stats`：**新增**
+- `GET /websites/:websiteId/sessions/:sessionId`：**新增**
+- `GET /websites/:websiteId/sessions/:sessionId/activity`：**新增**
+- `GET /websites/:websiteId/sessions/:sessionId/properties`：**新增**
+- `GET /websites/:websiteId/session-data/properties`：**新增**
+- `GET /websites/:websiteId/session-data/values`：**新增**
 
 ## 2024-05-23
 
-**Websites**
+**网站**
 
-- `GET /websites/[id]/stats`: Renamed `change` to `prev`.
+- `GET /websites/[id]/stats`：将 `change` 重命名为 `prev`。
 
 ## 2024-03-27
 
-**Websites**
+**网站**
 
-- `GET /websites/[id]/stats`: Renamed `uniques` to `visitors`. Added `visits`.
+- `GET /websites/[id]/stats`：将 `uniques` 重命名为 `visitors`。添加了 `visits`。
 
 ## 2024-02-16
 
-**Websites**
+**网站**
 
-- `POST /websites`: Added teamId as an optional parameter.
+- `POST /websites`：将 teamId 添加为可选参数。
 
-**Teams**
+**团队**
 
-- `/teams/[id]/websites/[websiteId]`: **Deprecated**
-- `GET /teams/[id]/users/[userId]/index`: **Added**
+- `/teams/[id]/websites/[websiteId]`：**弃用**
+- `GET /teams/[id]/users/[userId]/index`：**新增**
 
-**Reports**
+**报告**
 
-- `GET /reports/index`: Added `websiteId` and `teamId` added as query parameters.
+- `GET /reports/index`：添加 `websiteId` 和 `teamId` 作为查询参数。

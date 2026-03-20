@@ -1,10 +1,10 @@
 ---
-title: Websites
+title: 网站
 ---
 
-Operations around Website management and statistics.
+网站管理和统计相关的操作。
 
-**Endpoints**
+**端点**
 
 ```text
 GET /api/websites
@@ -19,172 +19,55 @@ POST /api/websites/:websiteId/reset
 
 ## GET /api/websites
 
-Returns all user websites.
+返回所有用户网站。
 
-**Parameters**
+**参数**
 
-- `includeTeams`: (boolean) Set to true if you want to include websites where you are the team owner.
-- `search`: (optional string) Search text.
-- `page`: (optional number, default 1) Determines page.
-- `pageSize`: (optional string) Determines how many results to return.
-
-**Sample response**
-
-```json
-{
-  "data": [
-    {
-      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-      "name": "Example",
-      "domain": "example.com",
-      "shareId": null,
-      "resetAt": null,
-      "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-      "teamId": null,
-      "createdBy": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-      "createdAt": "0000-00-00T00:00:00.000Z",
-      "updatedAt": "0000-00-00T00:00:00.000Z",
-      "deletedAt": null,
-      "user": {
-        "username": "bob@aol.com",
-        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-      }
-    }
-  ],
-  "count": 1,
-  "page": 1,
-  "pageSize": 10
-}
-```
+- `includeTeams`：（布尔值）如果您想包含您是团队所有者的网站，则设置为 true。
+- `search`：（可选字符串）搜索文本。
+- `page`：（可选数字，默认 1）确定页码。
+- `pageSize`：（可选字符串）确定返回的结果数量。
 
 ---
 
 ## POST /api/websites
 
-Creates a website.
+创建网站。
 
-**Parameters**
+**参数**
 
-- `name`: (string) The name of the website in Umami.
-- `domain`: (string) The full domain of the tracked website.
-- `shareId`: (string | optional) A unique string to enable a share url. Set `null` to unshare.
-- `teamId`: (string | optional) The ID of the team the website will be created under.
-- `id`: (string | optional) Force a UUID assignment to the website.
-
-**Request body**
-
-```json
-{
-  "name": "Test",
-  "domain": "example.com"
-}
-```
-
-**Sample response**
-
-```json
-{
-  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "name": "Test",
-  "domain": "example.com",
-  "shareId": null,
-  "resetAt": null,
-  "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "teamId": null,
-  "createdBy": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "createdAt": "0000-00-00T00:00:00.000Z",
-  "updatedAt": "0000-00-00T00:00:00.000Z",
-  "deletedAt": null
-}
-```
+- `name`：（字符串）Umami 中网站的名称。
+- `domain`：（字符串）被追踪网站的完整域名。
+- `shareId`：（字符串 | 可选）启用分享 URL 的唯一字符串。设置为 `null` 以取消分享。
+- `teamId`：（字符串 | 可选）网站将在其下创建的团队 ID。
+- `id`：（字符串 | 可选）强制为网站分配 UUID。
 
 ---
 
 ## GET /api/websites/:websiteId
 
-Gets a website by ID.
-
-**Sample response**
-
-```json
-{
-  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "name": "Example",
-  "domain": "example.com",
-  "shareId": null,
-  "resetAt": null,
-  "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "teamId": null,
-  "createdBy": "133660ed-e51c-4ed9-84aa-c86654460cae",
-  "createdAt": "2025-10-10T22:01:06.201Z",
-  "updatedAt": "2025-10-10T22:02:02.220Z",
-  "deletedAt": null
-}
-```
+通过 ID 获取网站。
 
 ---
 
 ## POST /api/websites/:websiteId
 
-Updates a website.
+更新网站。
 
-**Parameters**
+**参数**
 
-- `name`: (string) The name of the website in Umami.
-- `domain`: (string) The full domain of the tracked website.
-- `shareId`: (string | optional) A unique string to enable a share url. Set `null` to unshare.
-
-**Request body**
-
-```json
-{
-  "name": "Test",
-  "domain": "domain.com"
-}
-```
-
-**Sample response**
-
-```json
-{
-  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "name": "Example",
-  "domain": "example.com",
-  "shareId": null,
-  "resetAt": null,
-  "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "teamId": null,
-  "createdBy": "133660ed-e51c-4ed9-84aa-c86654460cae",
-  "createdAt": "2025-10-10T22:01:06.201Z",
-  "updatedAt": "2025-10-10T22:02:02.220Z",
-  "deletedAt": null
-}
-```
+- `name`：（字符串）Umami 中网站的名称。
+- `domain`：（字符串）被追踪网站的完整域名。
+- `shareId`：（字符串 | 可选）启用分享 URL 的唯一字符串。设置为 `null` 以取消分享。
 
 ---
 
 ## DELETE /api/websites/:websiteId
 
-Deletes a website.
-
-**Sample response**
-
-```json
-{
-  "ok": true
-}
-```
+删除网站。
 
 ---
 
 ## POST /api/websites/:websiteId/reset
 
-Resets a website by removing all data related to the website.
-
-**Sample response**
-
-```json
-{
-  "ok": true
-}
-```
+通过移除与网站相关的所有数据来重置网站。

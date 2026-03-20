@@ -1,26 +1,26 @@
 ---
-title: Hosting
+title: 托管
 ---
 
-There are many ways you can get Umami up and running.
-All you need is a database [PostgreSQL](https://www.postgresql.org/) and server that can run [Node.js](https://nodejs.org/) (18.18 or newer).
+您可以通过多种方式启动和运行 Umami。
+您只需要一个数据库 [PostgreSQL](https://www.postgresql.org/) 和可以运行 [Node.js](https://nodejs.org/)（18.18 或更高版本）的服务器。
 
-## Single server
+## 单服务器
 
-In this setup you would have the database and web server running on the same machine. You can optionally run Umami behind
-a dedicated web server like [Nginx](https://www.nginx.com/) or [Apache](https://httpd.apache.org/) and proxy requests to Umami.
+在此设置中，数据库和 Web 服务器运行在同一台机器上。您可以选择将 Umami 放在
+[Nginx](https://www.nginx.com/) 或 [Apache](https://httpd.apache.org/) 等专用 Web 服务器后面，并将请求代理到 Umami。
 
-You can view the [Running on DigitalOcean](/docs/guides/running-on-digitalocean) guide to learn how to set up a server.
+您可以查看[在 DigitalOcean 上运行](/docs/guides/running-on-digitalocean)指南来了解如何设置服务器。
 
-## Separate database and web server
+## 单独的数据库和 Web 服务器
 
-In this setup you have a database running on its own machine that allows remote connections. Your web server is running on a different
-machine with Umami installed and connects to the database remotely to store and retrieve data.
+在此设置中，数据库运行在自己的机器上，允许远程连接。您的 Web 服务器运行在不同的
+机器上，安装了 Umami 并远程连接到数据库以存储和检索数据。
 
-## App hosting
+## 应用托管
 
-In this setup, you would have an app hosting provider host the Umami app for you. You would still need a database running elsewhere
-that the app could connect to. Here are a few app hosting providers that can host Umami. Vercel, Netlify, Render, and Northflank have a free tier available.
+在此设置中，您将让应用托管提供商为您托管 Umami 应用。您仍然需要在其他地方运行数据库，
+以便应用可以连接。以下是一些可以托管 Umami 的应用托管提供商。Vercel、Netlify、Render 和 Northflank 有免费层可用。
 
 - [Vercel](https://vercel.com/)
 - [Netlify](https://www.netlify.com/)
@@ -28,16 +28,15 @@ that the app could connect to. Here are a few app hosting providers that can hos
 - [Northflank](https://northflank.com/)
 - [Railway](https://railway.app/)
 
-For the deployment, the build command is `npm run build` and the publish directory is `.next`.
+对于部署，构建命令是 `npm run build`，发布目录是 `.next`。
 
-## Managed databases
+## 托管数据库
 
-A managed database is where the host provides you with a running database that you don't have to install or maintain. Here are some
-providers for managed databases.
+托管数据库是主机为您提供一个运行中的数据库，您无需安装或维护。以下是一些托管数据库提供商。
 
 - [DigitalOcean](https://www.digitalocean.com/products/managed-databases/)
 - [Linode](https://www.linode.com/products/databases/)
-- [Scaleway (EU)](https://www.scaleway.com/en/database/)
+- [Scaleway（欧盟）](https://www.scaleway.com/en/database/)
 - [Amazon Web Services](https://aws.amazon.com/products/databases/)
 - [Google Cloud SQL](https://cloud.google.com/sql/)
 - [Microsoft Azure](https://azure.microsoft.com/en-us/services/#databases)

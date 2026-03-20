@@ -1,14 +1,14 @@
 ---
-title: Track outbound links
+title: 追踪出站链接
 ---
 
-When a user clicks on a link to an external site, this event is normally not captured because
-the user is leaving the site where Umami runs. However, using [events](/docs/track-events) you can
-track this behavior.
+当用户点击指向外部网站的链接时，此事件通常不会被捕获，因为
+用户正在离开运行 Umami 的网站。但是，使用[事件](/docs/track-events)您可以
+追踪此行为。
 
-To track outbound links, you need to add data attributes to the anchor tag containing the external link.
-When the tag is clicked, the event will be triggered. In this example, we are sending
-an event named `outbound-link-click` with the value of `url` set to the external URL.
+要追踪出站链接，您需要向包含外部链接的锚点标签添加数据属性。
+当点击标签时，事件将被触发。在此示例中，我们发送一个名为 `outbound-link-click` 的事件，
+其中 `url` 值设置为外部 URL。
 
 ```html
 <a href="https://www.external-website.com"
@@ -19,8 +19,8 @@ an event named `outbound-link-click` with the value of `url` set to the external
 </a>
 ```
 
-If you don't want to manually update all you anchor tags, you can use this script to automatically add the
-event attributes to all your outbound tags. You can place the following script at the bottom of your HTML body.
+如果您不想手动更新所有锚点标签，可以使用此脚本自动将
+事件属性添加到所有出站标签。您可以将以下脚本放在 HTML body 的底部。
 
 ```html
 <script type="text/javascript">
@@ -35,4 +35,3 @@ event attributes to all your outbound tags. You can place the following script a
   })();
 </script>
 ```
-

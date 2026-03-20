@@ -1,36 +1,35 @@
 ---
-title: Running on Forge
+title: 在 Forge 上运行
 ---
 
-[Forge](https://forge.laravel.com/) is a paid server management services, tailored to hosting Laravel apps on Server Providers like DigitalOcean,
-Linode, Vultr, Amazon, Hetzner and more.
+[Forge](https://forge.laravel.com/) 是一个付费的服务器管理服务，专为在 DigitalOcean、Linode、Vultr、Amazon、Hetzner 等服务器提供商上托管 Laravel 应用而设计。
 
-If you have a Forge Account and a connected server bucket, you can easily set up an Umami installation.
+如果您有 Forge 账户并连接了服务器存储桶，您可以轻松设置 Umami 安装。
 
-## Prerequisites
+## 先决条件
 
-1. Configure the (sub) domain you would like to have Umami available on. Usually, you do this by configuring you DNS config with an A-Record that points to your bucket IP-Address.
+1. 配置您希望 Umami 可用的（子）域名。通常，您可以通过使用指向存储桶 IP 地址的 A 记录配置 DNS 来实现。
 
-## Setup
+## 设置
 
-1. Select your desired Server in Forge.
-2. Go to **Sites** > **New Site**
-   - Enter the domain name
-   - Project Type: Static HTML
-   - Check **Create Database**, enter a Database Name
-   - Click **Add**
-3. To install the Repository, fork the [https://github.com/umami-software/umami](https://github.com/umami-software/umami) project to your GitHub account or install from the official repository.
-   - Enter the Repository path: `umami-software/umami`
-   - Uncheck **Install Composer Dependencies**
-   - Click **Install Repository**
-4. Update the deployment script and add the following after the `git pull origin $FORGE_SITE_BRANCH` command.
+1. 在 Forge 中选择您想要的服务器。
+2. 进入**站点** > **新建站点**
+   - 输入域名
+   - 项目类型：静态 HTML
+   - 勾选**创建数据库**，输入数据库名称
+   - 点击**添加**
+3. 要安装仓库，将 [https://github.com/umami-software/umami](https://github.com/umami-software/umami) 项目分叉到您的 GitHub 账户或从官方仓库安装。
+   - 输入仓库路径：`umami-software/umami`
+   - 取消勾选**安装 Composer 依赖**
+   - 点击**安装仓库**
+4. 更新部署脚本并在 `git pull origin $FORGE_SITE_BRANCH` 命令之后添加以下内容。
 
    ```shell
    yarn install
    yarn build
    ```
 
-   Remove these lines, since we don't have artisan or use php:
+   删除以下行，因为我们没有 artisan 或使用 PHP：
 
    ```shell
    ( flock -w 10 9 || exit 1
@@ -41,21 +40,21 @@ If you have a Forge Account and a connected server bucket, you can easily set up
    fi
    ```
 
-5. In Forge, go to your Server page, click **Database** and add a user to the just created database.
-6. Create the database-connection string and add it to your `.env` file:
+5. 在 Forge 中，进入您的服务器页面，点击**数据库**并为刚刚创建的数据库添加用户。
+6. 创建数据库连接字符串并将其添加到您的 `.env` 文件：
 
    ```dotenv
    DATABASE_URL=mysql://user:password@localhost:3306/dbname
    ```
 
-   The connection url is in the following format:
+   连接 URL 格式如下：
 
    ```dotenv
    DATABASE_URL=postgresql://username:mypassword@localhost:5432/mydb
    DATABASE_URL=mysql://username:mypassword@localhost:3306/mydb
    ```
 
-7. Perform the initial project setup, via SSH:
+7. 通过 SSH 执行初始项目设置：
 
    ```shell
    yarn install
@@ -63,8 +62,8 @@ If you have a Forge Account and a connected server bucket, you can easily set up
    yarn build
    ```
 
-8. Go to your Umami-Site and click on **SSL** in the left menu and add an SSL-Certificate.
-9. Click **Edit files** > **Edit Nginx Configuration** and overwrite the following block:
+8. 进入您的 Umami 站点并在左侧菜单中点击**SSL**来添加 SSL 证书。
+9. 点击**编辑文件** > **编辑 Nginx 配置**并覆盖以下块：
 
    ```nginx
    location / {
@@ -78,11 +77,11 @@ If you have a Forge Account and a connected server bucket, you can easily set up
    }
    ```
 
-   This configuration will route the traffic to the node-server that Umami runs on.
+   此配置将把流量路由到 Umami 运行所在的 node 服务器。
 
-10. In Forge, go to your Server page, click **Daemons** and add **New Daemon** to keep the Umami Node-Server up and running.
-    - Command: `yarn start`
-    - Directory: `/home/forge/umami.yourdomain.tld`
-    - Click **Create**
+10. 在 Forge 中，进入您的服务器页面，点击**守护进程**并添加**新建守护进程**以保持 Umami Node 服务器运行。
+    - 命令：`yarn start`
+    - 目录：`/home/forge/umami.yourdomain.tld`
+    - 点击**创建**
 
-You should now be able to reach your Umami project.
+您现在应该能够访问您的 Umami 项目了。

@@ -1,29 +1,29 @@
 ---
-title: Enable Cloudflare headers
+title: 启用 Cloudflare 标头
 ---
 
-If you are using Cloudflare for your website, Umami will use the headers Cloudflare sends
-to determine the visitor's location information. However, by default Cloudflare only sends
-data for the country. If you also want region and city information, then you will need to
-configure Cloudflare to send additional headers.
+如果您使用 Cloudflare 托管您的网站，Umami 将使用 Cloudflare 发送的
+标头来确定访问者的位置信息。但是，默认情况下 Cloudflare 仅发送
+国家/地区数据。如果您还想获取地区和城市信息，则需要
+配置 Cloudflare 发送额外的标头。
 
-## Steps
+## 步骤
 
-1. Log in to the Cloudflare dashboard and select your account and website.
+1. 登录 Cloudflare 仪表盘并选择您的账户和网站。
 
-2.  Go to Rules > Settings.
+2. 进入规则 > 设置。
 
-3.  Go to the Managed Transforms tab.
+3. 进入托管转换选项卡。
 
-4. Enable the **Add visitor location headers** setting.
+4. 启用**添加访问者位置标头**设置。
 
-Then, you'll have to proxy [the following headers](https://github.com/umami-software/umami/blob/aaa1f9dc58feafe6af54248c5f0611112786fddf/src/lib/detect.ts#L14C2-L18C5) to Umami:
+然后，您必须将[以下标头](https://github.com/umami-software/umami/blob/aaa1f9dc58feafe6af54248c5f0611112786fddf/src/lib/detect.ts#L14C2-L18C5)代理到 Umami：
 
 - `CF-IPCountry`
 - `CF-RegionCode`
 - `CF-IPCity`
 
-For example, if you're using Nginx as a reverse proxy, you can add the following configuration:
+例如，如果您使用 Nginx 作为反向代理，可以添加以下配置：
 
 ```nginx
 location / {
@@ -39,8 +39,8 @@ location / {
 }
 ```
 
-## Force local geo database
+## 强制使用本地地理数据库
 
-Alternatively, when Cloudflare sends only the country but adding the visitor location
-headers is not possible, you can set the `SKIP_LOCATION_HEADERS` runtime variable to `1`.
-This disables header detection and forces the usage of the internal geo database.
+或者，当 Cloudflare 仅发送国家/地区但无法添加访问者位置
+标头时，您可以将 `SKIP_LOCATION_HEADERS` 运行时变量设置为 `1`。
+这将禁用标头检测并强制使用内部地理数据库。
